@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Prima pagina con css</title>
+
+<style>
+    body{
+         background-color:red;
+    }
+     #scatola1{
+        padding: 5px;
+        margin:10px;
+        height: 200px;
+        width: 200px;
+        border: 2px solid black;
+        background-color:purple;
+     }
+     #scatola2{
+        padding: 5px;
+        margin:10px;
+        height: 200px;
+        width: 200px;
+        border: 2px solid black;
+        background-color:purple;
+     }
+
+    
+     #scatola3{
+       padding: 5px;
+        margin:10px;
+        height: 200px;
+        width: 200px;
+        border: 2px solid black;
+        background-color:purple;
+     }
+    
+     #scatola4{
+       padding: 5px;
+        margin:10px;
+        height: 200px;
+        width: 200px;
+        border: 2px solid black;
+        background-color:purple;
+     }
+
+    
+    
+    #scatola5{
+      padding: 5px;
+       margin:10px;
+       height: 200px;
+       width: 200px;
+       border: 2px solid black;
+       background-color:purple;
+    }
+
+
+
+    
+
+</style>
+
+
+</head>
+<body>
+    <h1>Compito scatole Css</h1>
+<div id="scatola1">
+    Roger McGough:
+    Lontano da te
+    Lontano da te
+    sento un gran vuoto
+    una solitudine che mi mangia
+    Con te
+    sento quel rassicurante
+    desiderio di fuga.
+</div>
+
+<div id="scatola2">
+   Alfred de Musset:
+    Solitudine
+    Il cielo mi ha affidato il tuo cuore…
+    quando sarai dolente vieni da me
+    senza inquietudine,
+    ti seguirò nel tuo cammino.
+    Ma non posso toccare la tua mano,
+    amico, sono la solitudine.
+</div>
+
+<div id="scatola3">
+    Pablo Neruda:
+    Ed allora sono perché tu sei,
+    ed allora sei, sono e siamo,
+    e per amore sarò, sarai, saremo.
+</div>
+
+<div id="scatola4">
+   Sophia de Mello Breyner Andresen:
+    Promessa
+    Sei tu la Primavera che io aspettavo,
+    la vita moltiplicata e brillante,
+    in cui è pieno e perfetto ogni istante.
+</div>
+
+<div id="scatola5">
+  Maram al-Masri:
+    Che follia!
+    Il mio cuore ogni volta che sente bussare
+    apre la porta.
+</div>
+
+</body>
+</html>
