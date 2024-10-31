@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+.button {
+  display: inline-block;
+  padding: 15px 25px;
+  font-size: 24px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  color: #fff;
+  background-color: green;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 9px #999;
+}
+
+.button:hover {background-color:#3e8e41}
+
+.button:active {
+  background-color: #3e8e41;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+
+.bottone2 {
+  display: inline-block;
+  padding: 15px 25px;
+  font-size: 24px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  color: #fff;
+  background-color: red;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 9px #999;
+}
+
+.bottone2:hover {background-color: #e72424d6}
+
+.bottone2:active {
+  background-color: #e72424d6;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+
+.bottone3 {
+  display: inline-block;
+  padding: 15px 25px;
+  font-size: 24px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  color: #fff;
+  background-color: blue;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 9px #999;
+}
+
+.bottone3:hover {background-color: #0e298be4}
+
+.bottone3:active {
+  background-color: #0e298be4;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+</style>
+</head>
+<body>
+ 
+    <h2>Esercizzio bottoni - "premi uno dei bottoni"</h2>
+
+    <button class="button" onclick="MostraAlert1()">Premimi</button>
+    <input type="text" id="mioinput">
+    <button class="bottone2" onclick="MostraAlert2()">Premimi</button>
+    <input type="text" id="miosecondoinput">
+    <button class="bottone3" onclick="MostraAlert3()">Premimi</button>
+    <input type="text" id="mioterzoinput">
+    <script> 
+    function MostraAlert1(){
+        let m=document.getElementById("mioinput").value;
+        alert("ciao"+m)
+        }
+        function MostraAlert2(){
+            let f=document.getElementById("miosecondoinput").value;
+        alert("come stai?"+f)
+        }
+        function MostraAlert3(){
+            let a=document.getElementById("mioterzoinput").value;
+        alert("io bene"+a)
+        }
+</script>
+</body>
+</html>
