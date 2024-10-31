@@ -2,7 +2,7 @@
 <html>
 <head>
 <style>
-.buttone1 {
+.button {
   display: inline-block;
   padding: 15px 25px;
   font-size: 24px;
@@ -11,13 +11,13 @@
   text-decoration: none;
   outline: none;
   color: #fff;
-  background-color: #04AA6D;
+  background-color: green;
   border: none;
   border-radius: 15px;
   box-shadow: 0 9px #999;
 }
 
-.button:hover {background-color: #3e8e41}
+.button:hover {background-color:#3e8e41}
 
 .button:active {
   background-color: #3e8e41;
@@ -25,7 +25,7 @@
   transform: translateY(4px);
 }
 
-.buttone2 {
+.bottone2 {
   display: inline-block;
   padding: 15px 25px;
   font-size: 24px;
@@ -40,15 +40,15 @@
   box-shadow: 0 9px #999;
 }
 
-.button:hover {background-color: #3e8e41}
+.bottone2:hover {background-color: #e72424d6}
 
-.button:active {
-  background-color: #3e8e41;
+.bottone2:active {
+  background-color: #e72424d6;
   box-shadow: 0 5px #666;
   transform: translateY(4px);
 }
 
-.buttone3 {
+.bottone3 {
   display: inline-block;
   padding: 15px 25px;
   font-size: 24px;
@@ -63,10 +63,10 @@
   box-shadow: 0 9px #999;
 }
 
-.button:hover {background-color: #3e8e41}
+.bottone3:hover {background-color: #0e298be4}
 
-.button:active {
-  background-color: #3e8e41;
+.bottone3:active {
+  background-color: #0e298be4;
   box-shadow: 0 5px #666;
   transform: translateY(4px);
 }
@@ -74,20 +74,20 @@
 </head>
 <body>
  
-    <h2>Esercizzio bottoni - "Premi il bottone"</h2>
+    <h2>Esercizzio bottoni - "premi uno dei bottoni"</h2>
 
-    <button class="buttone1" onclick="MostraAlert()">Premimi</button>
-    <button class="buttone2" onclick="MostraAlert()">Premimi</button>
-    <button class="buttone3" onclick="MostraAlert()">Premimi</button>
+    <button class="button" onclick="MostraAlert1()">Premimi</button>
+    <button class="bottone2" onclick="MostraAlert2()">Premimi</button>
+    <button class="bottone3" onclick="MostraAlert3()">Premimi</button>
     <script> 
-    function MostraAlert(){
-        alert("esempio di alert azionato dal click del bottone")
+    function MostraAlert1(){
+        alert("ciao")
         }
-        function MostraAlert(){
-        alert("un altro esempio di alert azionato dal click del bottone")
+        function MostraAlert2(){
+        alert("come stai?")
         }
-        function MostraAlert(){
-        alert("ultimo esempio di alert azionato dal click del bottone")
+        function MostraAlert3(){
+        alert("io bene")
         }
 </script>
 </body>
