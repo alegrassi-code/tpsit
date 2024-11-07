@@ -6,21 +6,21 @@
     <title>Calcolo Dislivello</title>
     <style>
         body { 
-        font-family: Verdana, Geneva, Tahoma, sans-serif, sans-serif; 
+        font-family: Arial, Helvetica, sans-serif; 
         text-align: left;
         background-size: cover;
         background-attachment: fixed;
         margin: 0;
-        padding. 20px;
+        padding: 10px;
         background-image: url("https://wallpapers.com/images/hd/4k-mountain-pictures-1z92yubz3vf7fzs0.jpg");
         }
-        .container {
-          max-width: 500px;
+        .box {
+          width: 300px;
           margin:  auto; 
           padding: 20px; 
           border: 1px solid #ddd; 
           border-radius: 10px; 
-          background-color: magenta;
+          background-color: orange;
         }
 
         label, input { 
@@ -40,7 +40,7 @@
 </head>
 <body>
 
-<div class="container">
+<div class="box">
     <h2>Calcolo del Dislivello Totale</h2>
     
     <label for="start">Punto di partenza (m):</label>
@@ -52,7 +52,7 @@
     <label for="end"> Punto di arrivo (m):</label>
     <input type="number" id="end" required>
     
-    <button onclick="calcolaDislivello()">Calcola Dislivello</button>
+    <button onclick="calcolaDislivello()">Calcola</button>
 
     <h3>Risultato:</h3>
     <p id="output"></p>
