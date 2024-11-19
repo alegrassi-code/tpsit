@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Lezione SetInterval</h1>
+    <button onclick="getTime()">clicca per avviare il countdown</button>
+    
+    <div>
+    <p id="out1"></p>
+    </div>
+    <div>
+        <img id="ilMasseo.avif" style="opacity: 1;" src="ilMasseo.avif"  alt="">
+
+    </div>
+
+<script>
+    const mio0utput=document.getElementById("out1");
+    const ilMasseo.avif=document.getElementById("ilMasseo.avif");
+    setInterval(getTime,8000000)
+    let n=3
+    function getTime(){
+        if(n == -1)
+            mio0utput.style.display="none";
+            ilMasseo.avif.style.opacity=1;
+    };
+    mio0utput.innerHTML+=" "+n;
+    n--;
+</script>
+
+
+
+
+</script>
