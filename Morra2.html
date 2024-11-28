@@ -14,6 +14,7 @@
             cursor: pointer;
             margin: 10px;
         }
+        
     </style>
 </head>
 <body>
@@ -37,9 +38,9 @@
             let numeroCasuale = Math.floor(Math.random() * 3);
             let sceltaBot = morra[numeroCasuale];
 
-            document.getElementById("out1").innerHTML = `Hai scelto: ${sceltaGiocatore}. Il bot ha scelto: ${sceltaBot}.`;
+            document.getElementById("out1").innerHTML = 'Hai scelto: ${sceltaGiocatore}. Il computer ha scelto: ${sceltaBot}.';
 
-            // Determina il vincitore
+            
             if (sceltaGiocatore === sceltaBot) {
                 document.getElementById("out2").innerHTML = "Avete pareggiato";
             } else if (
@@ -51,15 +52,14 @@
                 document.getElementById("out2").innerHTML = "Hai vinto bravo";
             } else {
                 punteggioBot++;
-                document.getElementById("out2").innerHTML = "Ha vinto il Bot, ci riproverai la prossima volta";
+                document.getElementById("out2").innerHTML = "Ha vinto il computer, ci riproverai la prossima volta";
             }
 
-            // Stampa il punteggio
             stampaPunteggio();
         }
 
         function stampaPunteggio() {
-            document.getElementById("out2").innerHTML += `<br>Punteggio Giocatore: ${punteggioGiocatore} - Punteggio Bot: ${punteggioBot}`;
+            document.getElementById("out2").innerHTML += `<br>Il tuo punteggio: ${punteggioGiocatore} Punteggio del computer: ${punteggioBot}`;
         }
     </script>
 
