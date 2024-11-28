@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Morra Cinese</title>
+    <style>
+        #out2 {
+            font-size: large;
+            color: red;
+        }
+        .image {
+            width: 100px;
+            cursor: pointer;
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Morra Cinese</h1>
+    <div>
+        <img src="https://m.media-amazon.com/images/I/8122pcpnX3L.jpg" alt="Sasso" class="image" onclick="gioca('sasso')">
+        <img src="https://images.gadget365.it/product_image/mob/MO6914-06.jpg?w=520" alt="Carta" class="image" onclick="gioca('carta')">
+        <img src="https://prymacancelleria.it/wp-content/uploads/2021/11/0223550_B.jpg" alt="Forbice" class="image" onclick="gioca('forbice')">
+    </div>
+
+    <p id="out1"></p>
+    <p id="out2"></p>
+
+    <script>
+        let morra = ["sasso", "carta", "forbice"];
+        let punteggioGiocatore = 0;
+        let punteggioBot = 0;
+
+        function gioca(sceltaGiocatore) {
+            let numeroCasuale = Math.floor(Math.random() * 3);
+            let sceltaBot = morra[numeroCasuale];
+
+            document.getElementById("out1").innerHTML = `Hai scelto: ${sceltaGiocatore}. Il bot ha scelto: ${sceltaBot}.`;
+
+            // Determina il vincitore
+            if (sceltaGiocatore === sceltaBot) {
+                document.getElementById("out2").innerHTML = "Avete pareggiato";
+            } else if (
+                (sceltaGiocatore === "sasso" && sceltaBot === "forbice") ||
+                (sceltaGiocatore === "carta" && sceltaBot === "sasso") ||
+                (sceltaGiocatore === "forbice" && sceltaBot === "carta")
+            ) {
+                punteggioGiocatore++;
+                document.getElementById("out2").innerHTML = "Hai vinto bravo";
+            } else {
+                punteggioBot++;
+                document.getElementById("out2").innerHTML = "Ha vinto il Bot, ci riproverai la prossima volta";
+            }
+
+            // Stampa il punteggio
+            stampaPunteggio();
+        }
+
+        function stampaPunteggio() {
+            document.getElementById("out2").innerHTML += `<br>Punteggio Giocatore: ${punteggioGiocatore} - Punteggio Bot: ${punteggioBot}`;
+        }
+    </script>
+
+</body>
+</html>
