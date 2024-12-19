@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Numero Casuale</title>
+</head>
+<body>
+    <h1>Numero Casuale </h1>
+    <div id="output"></div>
+    <style>
+    
+
+
+
+
+    </style>
+
+    <script>
+        
+        function isPrime(num) {
+            if (num <= 1) return false;
+            for (let i = 2; i <= Math.sqrt(num); i++) {
+                if (num % i === 0) return false;
+            }
+            return true;
+        }
+
+        
+        function generateAndCalculate() {
+            
+            let num = Math.floor(Math.random() * 1000) + 1;
+
+            
+            let pariDispari = num % 2 === 0 ? "pari" : "dispari";
+            let primo = isPrime(num) ? "è un numero primo" : "non è un numero primo";
+            let doppio = num * 2;
+            let meta = Math.floor(num / 2);
+            let complemento = 1000 - num;
+            let somma = (num - 1) + num + (num + 1);
+            let moltiplicazione = (num * 3.14).toFixed(2);
+
+            
+            let result = `
+                Numero casuale: ${num}
+                <br>Il numero è ${pariDispari}.
+                <br>${num} ${primo}.
+                <br>Il doppio di ${num} è ${doppio}.
+                <br>La metà intera di ${num} è ${meta}.
+                <br>Il complemento di ${num} è ${complemento}.
+                <br>La somma del numero, del suo precedente e del suo successivo è ${somma}.
+                <br>${num} moltiplicato per 3.14 è ${moltiplicazione}.
+            `;
+
+            
+            document.getElementById("output").innerHTML = result;
+        }
+
+        
+        setInterval(generateAndCalculate, 5000);
+        
+        
+        generateAndCalculate();
+    </script>
+</body>
+</html>
+
