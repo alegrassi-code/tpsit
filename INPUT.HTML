@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestione Stringhe Semplice</title>
+</head>
+<style>
+    body{
+        background-color: rgb(193, 57, 57);
+    }
+    
+
+
+
+</style>
+<body>
+
+    <h1>Gestione Stringhe</h1>
+    <form id="stringForm">
+        <label for="stringA">Stringa A:</label>
+       <input type="text" id="stringA" required>
+        <br>
+        <label for="stringB">Stringa B:</label>
+        <input type="text" id="stringB" required>
+        <br>
+        <button type="submit">Invia</button>
+    </form>
+
+    <div id="output"></div>
+
+    <script>
+        document.getElementById('stringForm').addEventListener('submit', function(event) {
+
+
+            const stringA = document.getElementById('stringA').value;
+            const stringB = document.getElementById('stringB').value;
+
+            const lengthA = stringA.length;
+            const lengthB = stringB.length;
+
+            const reversedA = stringA.split('').reverse().join('');
+            const reversedB = stringB.split('').reverse().join('');
+
+            const concatenated = stringA + stringB;
+
+            const totalLength = lengthA + lengthB;
+            let message = `Lunghezza Stringa A: ${lengthA}<br>
+                           Lunghezza Stringa B: ${lengthB}<br>
+                           Stringa A al contrario: ${reversedA}<br>
+                           Stringa B al contrario: ${reversedB}<br>
+                           Stringhe unite: ${concatenated}<br>
+                           Somma delle lunghezze: ${totalLength}`;      
+
+            if (lengthB > 20) {
+                message += "<br><strong>Attenzione:</strong> Stringa B troppo lunga!";
+            }
+
+            document.getElementById('output').innerHTML = message;
+        });
+    </script>
+
+</body>
+</html>
