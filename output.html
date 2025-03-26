@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calcolo Output Semplice</title>
+<style>
+body{
+    background-color: salmon;
+}
+
+</style>
+</head>
+<body>
+    <h1>Calcol Output</h1>
+    <form id="calcoloForm">
+        <input type="number" id="input 1" placeholder="Input 1 " required>
+        <input type="number" id="input 2" placeholder="Input 2" required>
+        <input type="number" id="input 3" placeholder="Input 3" required>
+        <input type="number" id="input 4" placeholder="Input 4" required>
+        <button type="submit">Calcola il risultato</button>
+    </form>
+
+    <h2>Risultati: </h2>
+    <p id="risultatoPrimo"></p>
+    <p id="risultatoSecondo"></p>
+
+    <script>
+        document.getElementById('calcoloForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const a = parseFloat(document.getElementById('inputA').value);
+            const b = parseFloat(document.getElementById('inputB').value);
+            const c = parseFloat(document.getElementById('inputC').value);
+            const d = parseFloat(document.getElementById('inputD').value);
+
+            const primoOutput = a + b + c + d;
+            const secondoOutput = Math.sqrt(primoOutput);
+
+            document.getElementById('risultatoPrimo').innerText = "Primo Output: " + primoOutput;
+            document.getElementById('risultatoSecondo').innerText = "Secondo Output: " + secondoOutput;
+        });
+    </script>
+</body>
+</html>
