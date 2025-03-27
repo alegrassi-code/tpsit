@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Div Sovrapposti</title>
+    <style>
+        body {
+            position: relative;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+            background-color: black;
+
+        }
+        .box {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            border: 10px solid white;
+        }
+        .blue { background-color: rgb(30, 30, 108); }
+        .yellow { background-color: rgb(217, 217, 5); }
+    </style>
+</head>
+<body>
+    <div id="blueDiv" class="box blue"></div>
+    <div id="yellowDiv" class="box yellow"></div>
+
+    <script>
+        function getRandomPosition() {
+            return {
+                x: Math.random() * (window.innerWidth - 100),
+                y: Math.random() * (window.innerHeight - 100)
+            };
+        }
+
+        function positionDivs() {
+            const blueDiv = document.getElementById('blueDiv');
+            const yellowDiv = document.getElementById('yellowDiv');
+
+            const bluePos = getRandomPosition();
+            const yellowPos = getRandomPosition();
+
+            blueDiv.style.left = `${bluePos.x}px`;
+            blueDiv.style.top = `${bluePos.y}px`;
+            yellowDiv.style.left = `${yellowPos.x}px`;
+            yellowDiv.style.top = `${yellowPos.y}px`;
+
+            if (isOverlapping(blueDiv, yellowDiv)) {
+                blueDiv.style.backgroundColor = 'red';
+                yellowDiv.style.backgroundColor = 'red';
+            }
+        }
+
+        function isOverlapping(div1, div2) {
+            const rect1 = div1.getBoundingClientRect();
+            const rect2 = div2.getBoundingClientRect();
+            return !(rect1.right < rect2.left || rect1.left > rect2.right || rect1.bottom < rect2.top || rect1.top > rect2.bottom);
+        }
+
+        positionDivs();
+        setInterval(positionDivs, 2000);
+    </script>
+</body>
+</html>
