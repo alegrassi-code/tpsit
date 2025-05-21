@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gioco di Scrittura e Analisi Tempi</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background: #f4f4f4;
+      padding: 2rem;
+      max-width: 800px;
+      margin: auto;
+    }
+
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+
+    input, button {
+      padding: 0.6rem;
+      margin-top: 1rem;
+      font-size: 1rem;
+    }
+
+    button {
+      background: #28a745;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      margin-left: 0.5rem;
+    }
+
+    .result, .analysis {
+      margin-top: 1.5rem;
+      background: #fff;
+      padding: 1rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    .timer {
+      font-size: 1.5rem;
+      margin-top: 20px;
+    }
+
+    canvas {
+      margin-top: 2rem;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Gioco di Scrittura e Analisi Tempi</h1>
+
+  <div class="container">
+    <div class="word-to-type" id="wordToType">Programmazione</div>
+    <input type="text" id="userInput" placeholder="Scrivi la parola qui...">
+    <div class="timer" id="timer">Tempo: 0s</div>
+    <div class="result" id="result"></div>
+  </div>
+
+  <p>Inserisci i tempi (in secondi) delle tue prove:</p>
+  <input type="number" id="numberInput" placeholder="Esempio: 3.2" step="0.01" />
+  <button onclick="addNumber()">Aggiungi Tempo</button>
+
+  <div class="result">
+    <p><strong>Tempi inseriti:</strong> <span id="numberList">Nessuno</span></p>
+    <p><strong>Media:</strong> <span id="mean">-</span> s</p>
+    <p><strong>Deviazione Standard:</strong> <span id="stdDev">-</span> s</p>
+  </div>
+
+  <canvas id="chart" width="600" height="300"></canvas>
+
+  <div class="analysis">
+    <h3>Analisi:</h3>
+    <p id="feedback">Inserisci almeno 2 dati per l’analisi.</p>
+  </div>
+
+  <button id="downloadBtn">Esporta Dati in JSON</button>
+
+  <script>
+    const words = ["Programmazione", "JavaScript", "Sviluppo", "Tecnologia", "Computer"];
+    let currentWordIndex = 0;
+    const numbers = [];
+    let chart;
+    let startTime;
+    let timerInterval;
+
+    const wordToType = document.getElementById('wordToType');
+    const userInput = document.getElementById('userInput');
+    const timerDisplay = document.getElementById('timer');
+    const resultDisplay = document.getElementById('result');
+    const numberInput = document.getElementById('numberInput');
+    const numberList = document.getElementById('numberList');
+    const meanDisplay = document.getElementById('mean');
+    const stdDevDisplay = document.getElementById('stdDev');
+    const feedbackDisplay = document.getElementById('feedback');
+
+    function startTimer() {
+      startTime = Date.now();
+      timerInterval = setInterval(() => {
+        const elapsedTime = (Date.now() - startTime) / 1000;
+        timerDisplay.textContent = `Tempo: ${elapsedTime.toFixed(1)}s`;
+      }, 100);
+    }
+
+    function stopTimer() {
+      clearInterval(timerInterval);
+    }
+
+    function changeWord() {
+      stopTimer();
+      currentWordIndex = (currentWordIndex + 1) % words.length;
+      wordToType.textContent = words[currentWordIndex];
+      userInput.value = '';
+      resultDisplay.textContent = '';
+      timerDisplay.textContent = 'Tempo: 0s';
+      startTimer();
+    }
+
+    userInput.addEventListener('focus', () => {
+      if (!startTime) {
+        startTimer();
+      }
+    });
+
+    userInput.addEventListener('keydown', (e) => {
+      if (e.key === "Enter") {
+        if (userInput.value === wordToType.textContent) {
+          stopTimer();
+          const timeTaken = ((Date.now() - startTime) / 1000).toFixed(2);
+          resultDisplay.textContent = `Hai impiegato ${timeTaken} secondi!`;
+          numbers.push(parseFloat(timeTaken));
+          updateDisplay();
+          setTimeout(changeWord, 1000);
+        } else {
+          resultDisplay.textContent = "Hai scritto la parola in modo errato. Riprova!";
+        }
+      }
+    });
+
+    function addNumber() {
+      const value = parseFloat(numberInput.value);
+      if (!isNaN(value)) {
+        numbers.push(value);
+        numberInput.value = '';
+        updateDisplay();
+      }
+    }
+
+    function updateDisplay() {
+      numberList.textContent = numbers.join(', ');
+
+      const mean = calculateMean(numbers);
+      const stdDev = calculateStandardDeviation(numbers, mean);
+
+      meanDisplay.textContent = mean.toFixed(2);
+      stdDevDisplay.textContent = stdDev.toFixed(2);
+
+      renderChart(numbers, mean, stdDev);
+      analyzeData(stdDev);
+    }
+
+    function calculateMean(arr) {
+      return arr.reduce((a, b) => a + b, 0) / arr.length;
+    }
+
+    function calculateStandardDeviation(arr, mean) {
+      const variance = arr.reduce((sum, val) => sum + Math.pow(val - mean, 2), 0) / arr.length;
+      return Math.sqrt(variance);
+    }
+
+    function renderChart(data, mean, stdDev) {
+      const labels = data.map((_, i) => `Prova ${i + 1}`);
+      const meanLine = new Array(data.length).fill(mean);
+      const upper = new Array(data.length).fill(mean + stdDev);
+      const lower = new Array(data.length).fill(mean - stdDev);
+
+      if (chart) chart.destroy();
+      const ctx = document.getElementById('chart').getContext('2d');
+
+      chart = new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels,
+          datasets: [
+            {
+              label: 'Tempi (s)',
+              data,
+              borderColor: 'blue',
+              tension: 0.3
+            },
+            {
+              label: 'Media',
+              data: meanLine,
+              borderColor: 'green',
+              borderDash: [5, 5]
+            },
+            {
+              label: '+1 Dev. Std.',
+              data: upper,
+              borderColor: 'orange',
+              borderDash: [3, 3]
+            },
+            {
+              label: '-1 Dev. Std.',
+              data: lower,
+              borderColor: 'orange',
+              borderDash: [3, 3]
+            }
+          ]
+        },
+        options: {
+          plugins: {
+            legend: { position: 'top' },
+            title: {
+              display: true,
+              text: 'Distribuzione dei Tempi'
+            }
+          }
+        }
+      });
+    }
+
+    function analyzeData(stdDev) {
+      if (numbers.length < 2) {
+        feedbackDisplay.textContent = 'Inserisci almeno 2 valori per l’analisi.';
+        return;
+      }
+
+      if (stdDev < 0.3) {
+        feedbackDisplay.textContent = "Ottimo! I tuoi tempi sono molto costanti.";
+      } else if (stdDev < 1) {
+        feedbackDisplay.textContent = "I tuoi tempi sono abbastanza stabili.";
+      } else {
+        feedbackDisplay.textContent = "Attenzione! I tuoi tempi sono molto variabili. Prova a concentrarti meglio.";
+      }
+    }
+
+    // Funzione per esportare i dati in un file JSON
+    document.getElementById('downloadBtn').addEventListener('click', function() {
+      const data = {
+        times: numbers,
+        mean: calculateMean(numbers).toFixed(2),
+        stdDev: calculateStandardDeviation(numbers, calculateMean(numbers)).toFixed(2),
+        analysis: feedbackDisplay.textContent
+      };
+      const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'tempi_reazione.json';
+      a.click();
+      URL.revokeObjectURL(url);
+    });
+  </script>
+
+</body>
+</html>
