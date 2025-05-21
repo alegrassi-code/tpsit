@@ -82,7 +82,11 @@
   <button id="downloadBtn">Esporta Dati in JSON</button>
 
   <script>
-    const words = ["Programmazione", "JavaScript", "Sviluppo", "Tecnologia", "Computer"];
+    const words = [
+      "Programmazione", "JavaScript", "Sviluppo", "Tecnologia", "Computer", 
+      "Algoritmo", "Rete","Software","Intelligenza artificiale", "Sistemi", "Codifica", 
+      "Java", "Python", "C++", "HTML", "CSS", "Windows", 
+    ];
     let currentWordIndex = 0;
     const numbers = [];
     let chart;
@@ -113,7 +117,7 @@
 
     function changeWord() {
       stopTimer();
-      currentWordIndex = (currentWordIndex + 1) % words.length;
+      currentWordIndex = Math.floor(Math.random() * words.length); 
       wordToType.textContent = words[currentWordIndex];
       userInput.value = '';
       resultDisplay.textContent = '';
@@ -129,7 +133,7 @@
 
     userInput.addEventListener('keydown', (e) => {
       if (e.key === "Enter") {
-        if (userInput.value === wordToType.textContent) {
+        if (userInput.value.toLowerCase() === wordToType.textContent.toLowerCase()) {  
           stopTimer();
           const timeTaken = ((Date.now() - startTime) / 1000).toFixed(2);
           resultDisplay.textContent = `Hai impiegato ${timeTaken} secondi!`;
@@ -240,7 +244,6 @@
       }
     }
 
-    // Funzione per esportare i dati in un file JSON
     document.getElementById('downloadBtn').addEventListener('click', function() {
       const data = {
         times: numbers,
@@ -260,3 +263,4 @@
 
 </body>
 </html>
+
