@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Gioco di Scrittura</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f3f4f6;
+            color: #333;
+        }
+        .container {
+            text-align: center;
+        }
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+        .word-to-type {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        input {
+            padding: 10px;
+            font-size: 1.2rem;
+            width: 300px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        .timer {
+            font-size: 1.5rem;
+            margin-top: 20px;
+        }
+        .result {
+            font-size: 1.2rem;
+            margin-top: 20px;
+            height: 1.5em;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Gioco di Scrittura</h1>
+    <div class="word-to-type" id="wordToType">Programmazione</div>
+    <input type="text" id="userInput" placeholder="Scrivi la parola qui..." autocomplete="off" />
+    <div class="timer" id="timer">Tempo: 0s</div>
+    <div class="result" id="result"></div>
+</div>
+
+<script>
+    const wordToType = document.getElementById('wordToType');
+    const userInput = document.getElementById('userInput');
+    const timerDisplay = document.getElementById('timer');
+    const resultDisplay = document.getElementById('result');
+
+    let startTime;
+    let timerInterval;
+    let timerStarted = false;
+
+    const words = [
+        "programmazione", "javascript", "sviluppo", "tecnologia", "computer",
+        "algoritmo", "variabile", "funzione", "array", "oggetto",
+        "condizione", "ciclo", "html", "css", "backend",
+        "frontend", "database", "debugging", "logica", "interfaccia"
+    ];
+
+    function getRandomWord() {
+        const randomIndex = Math.floor(Math.random() * words.length);
+        return words[randomIndex];
+    }
+
+    function startTimer() {
+        startTime = Date.now();
+        timerStarted = true;
+        clearInterval(timerInterval);
+        timerInterval = setInterval(() => {
+            const elapsedTime = (Date.now() - startTime) / 1000;
+            timerDisplay.textContent = `Tempo: ${elapsedTime.toFixed(1)}s`;
+        }, 100);
+    }
+
+    function stopTimer() {
+        clearInterval(timerInterval);
+        timerStarted = false;
+    }
+
+    function resetTimer() {
+        stopTimer();
+        timerDisplay.textContent = 'Tempo: 0s';
+    }
+
+    function setNewWord() {
+        wordToType.textContent = getRandomWord();
+        userInput.value = '';
+        resultDisplay.textContent = '';
+        resetTimer();
+        userInput.focus();
+    }
+
+ 
+    userInput.addEventListener('input', () => {
+        if (!timerStarted && userInput.value.length > 0) {
+            startTimer();
+        }
+    });
+
+    userInput.addEventListener('keydown', (e) => {
+        if (e.key === "Enter") {
+            const typed = userInput.value.trim().toLowerCase();
+            const expected = wordToType.textContent.toLowerCase();
+
+            if (!timerStarted) {
+                return;
+            }
+
+            if (typed === expected) {
+                stopTimer();
+                const timeTaken = ((Date.now() - startTime) / 1000).toFixed(2);
+                resultDisplay.textContent = `Hai impiegato ${timeTaken} secondi!`;
+                setTimeout(() => {
+                    setNewWord();
+                }, 1000);
+            } else {
+                resultDisplay.textContent = "Hai scritto la parola in modo errato. Riprova!";
+            }
+        }
+    });
+
+    setNewWord();
+</script>
+
+</body>
+</html>
